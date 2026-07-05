@@ -1,24 +1,24 @@
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import AmbientGlow from "@/components/ui/AmbientGlow";
-import Hero from "@/components/sections/Hero";
-import Marquee from "@/components/sections/Marquee";
-import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";
 import Testimonials from "@/components/sections/Testimonials";
 import CtaBand from "@/components/sections/CtaBand";
 import Footer from "@/components/sections/Footer";
 
-export default function Home() {
+export const metadata = {
+  title: "Our Work — Healora",
+  description:
+    "Explore our portfolio of custom software solutions, including web apps, mobile apps, and machine learning integrations.",
+};
+
+export default function WorkPage() {
   return (
     <>
       <ScrollProgress />
       <AmbientGlow />
       <Navbar />
-      <main className="overflow-x-clip">
-        <Hero />
-        <Marquee />
-        <Services />
+      <main className="pt-16 overflow-x-clip">
         <Work />
         <Testimonials />
         <CtaBand />
