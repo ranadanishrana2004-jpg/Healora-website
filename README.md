@@ -1,38 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# HealOra website
 
-## Getting Started
+Production publishes the static redesign from the developer package. The HTML pages, `style.css`, `site.js`, and `assets/` at the repository root are the active website. The earlier Next.js application remains in `src/` for reference; it is not the Vercel production build.
 
-First, run the development server:
+## Build and preview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+node scripts/build-static.mjs
+python -m http.server 4173 --bind 127.0.0.1 --directory .static-dist
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:4173. The build uses Node's standard library and copies only the 24 public website files into `.static-dist/`; it requires no npm install.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vercel deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`vercel.json` overrides the previous Next.js preset with `framework: null`, skips dependency installation, runs the static build, and publishes `.static-dist/`. Keep the Vercel project root at the repository root. The connected project is `healora-website-live` under `ranadanishrana2004-jpgs-projects`.
 
-## Learn More
+Directory pages use trailing slashes, and `404.html` supplies the missing-page response. There is no catch-all SPA rewrite. Security headers are retained; unversioned files revalidate so new releases do not leave stale CSS or images. The build output excludes source code, dependency manifests, and configuration.
 
-To learn more about Next.js, take a look at the following resources:
+The canonical site is https://www.healora.org. Deployment does not require DNS or email-record changes. Verify the homepage, all 15 sitemap URLs, navigation, contact form, assets, slash redirects, and an unknown URL after release.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The contact form prepares a draft to `healora98@gmail.com` in the visitor's email app. It does not send or store enquiries; the page explains this behavior.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Rollback
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# Healora-website" 
-"# deployment test" 
+The production deployment before this change was `896stnzCvS9gy5MBAUxP7zYfGXvX` (Git commit `7eddb4f90a9cdf03722eca1df5f66b6f4cad9eef`). Use Vercel's rollback to that ready deployment if needed, then revert the static-deployment configuration commit in Git before another production push.
