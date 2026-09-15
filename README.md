@@ -9,7 +9,17 @@ node scripts/build-static.mjs
 python -m http.server 4173 --bind 127.0.0.1 --directory .static-dist
 ```
 
-Open http://localhost:4173. The build uses Node's standard library and copies only the 24 public website files into `.static-dist/`; it requires no npm install.
+Open http://localhost:4173. The build uses Node's standard library and copies only the public website files into `.static-dist/`; it requires no npm install. It then runs the SEO regression checks and fails on broken metadata, internal links, missing assets or sitemap coverage.
+
+## SEO maintenance
+
+All 15 public HTML pages have canonical URLs, unique titles and descriptions, Open Graph/Twitter previews, and linked Organization, WebSite and page structured data. Service pages also describe their Service and breadcrumbs. The two error documents remain `noindex`. Main content and native FAQ details are available without JavaScript.
+
+After changing a page title or adding services, update `scripts/update-seo.mjs` where necessary, run `node scripts/update-seo.mjs`, then build. The metadata updater preserves the body and does not change the sitemap. When adding or removing pages, maintain `sitemap.xml` and the expected page count in `scripts/check-seo.mjs`. Descriptions intentionally summarise visible service content. Do not add invented reviews, credentials, project results, dates or addresses to schema.
+
+The homepage uses responsive WebP images (with the original PNG fallback) and retains its original artwork, layout and dimensions. The 1200 × 630 social preview is `assets/social-preview.jpg`. See [SEO handover](SEO-HANDOVER.md) for deployment verification and remaining search-account work.
+
+For Google ownership verification and sitemap submission through GoDaddy, follow [Search Console setup](SEARCH-CONSOLE-SETUP.md). The recommended Domain property uses a Google-issued DNS TXT record and requires no website code or environment variable.
 
 ## Vercel deployment
 

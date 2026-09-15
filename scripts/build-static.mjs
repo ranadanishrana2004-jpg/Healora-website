@@ -22,3 +22,5 @@ for (const entry of entries) {
 }
 const files = await readdir(output, { recursive: true, withFileTypes: true });
 console.log(`Static website ready: ${files.filter((file) => file.isFile()).length} public files in .static-dist`);
+// Fail deployment if metadata, crawl paths, schema or local assets regress.
+await import("./check-seo.mjs");

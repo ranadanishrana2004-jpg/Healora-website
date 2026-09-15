@@ -20,6 +20,7 @@
 # production
 /build
 /.static-dist/
+/.seo-qa/
 
 # misc
 .DS_Store
