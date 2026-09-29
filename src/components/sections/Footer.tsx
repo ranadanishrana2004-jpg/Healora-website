@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Activity, Globe, Send, MessageCircle, ArrowRight } from "lucide-react";
 import { nav } from "@/lib/site";
@@ -63,14 +64,14 @@ export default function Footer() {
         {/* links */}
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <a href="/" className="flex items-center gap-2.5">
+            <Link href="/" className="flex items-center gap-2.5">
               <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-400 to-aqua-500">
                 <Activity className="h-5 w-5 text-ink" strokeWidth={2.5} />
               </span>
               <span className="font-display text-lg font-bold text-white">
                 Heal<span className="text-gradient">ora</span>
               </span>
-            </a>
+            </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
               Innovating digital solutions with care. We turn ideas into
               powerful software that drives growth.
@@ -88,7 +89,11 @@ export default function Footer() {
             </div>
           </div>
 
-          <FooterCol title="Navigate" links={nav.map((n) => n.label)} hrefs={nav.map((n) => n.href)} />
+          <FooterCol
+            title="Navigate"
+            links={nav.map((n) => n.label)}
+            hrefs={nav.map((n) => n.href)}
+          />
           <FooterCol title="Services" links={serviceLinks} />
           <FooterCol
             title="Company"
@@ -125,12 +130,12 @@ function FooterCol({
       <ul className="mt-4 space-y-2.5">
         {links.map((l, i) => (
           <li key={l}>
-            <a
+            <Link
               href={hrefs?.[i] ?? "/contact"}
               className="text-sm text-slate-400 transition-colors hover:text-brand-300"
             >
               {l}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -16,7 +16,6 @@ export default function SpotlightCard({
   glowColor = "16, 185, 129",
 }: Props) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -31,8 +30,6 @@ export default function SpotlightCard({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-panel/60 transition-colors duration-300 hover:border-white/15 ${className}`}
       style={
         {
@@ -56,7 +53,8 @@ export default function SpotlightCard({
           backgroundImage: `radial-gradient(150px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--glow-color), 0.45), transparent 75%)`,
           backgroundOrigin: "border-box",
           backgroundClip: "border-box",
-          WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+          WebkitMask:
+            "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "destination-out",
           maskComposite: "exclude",
         }}

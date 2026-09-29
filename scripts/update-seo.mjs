@@ -28,8 +28,11 @@ for (const url of urls) {
   const description = descriptions[url.pathname.split("/")[2]] ?? decode(html.match(/name="description" content="([^"]*)"/)[1]);
   html = html.replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*(">)/g, `$1${escape(description)}$2`);
   html = html.replace(/name="robots" content="[^"]*"/, 'name="robots" content="index, follow, max-image-preview:large"');
-  // Remove our existing social tags first so repeated runs are idempotent.
-  html = html.replace(/<meta (?:property="og:image(?::[^"]+)?"|name="twitter:[^"]+") content="[^"]*">/g, "");
+  // Remove all prior social and image metadata so repeated runs stay idempotent.
+  html = html.replace(
+    /<meta\s+(?:name|property)="(?:twitter:(?:card|site|title|description|image(?:\:[^"]+)?|image:alt)|og:image(?:\:[^"]+)?)"\s+content="[^"]*">\s*/gi,
+    "",
+  );
   const social = [
     ["property", "og:image", `${origin}/assets/social-preview.jpg`],
     ["property", "og:image:width", "1200"], ["property", "og:image:height", "630"],

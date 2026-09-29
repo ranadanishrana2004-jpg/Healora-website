@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
@@ -11,10 +12,10 @@ const categories = ["All", "Web", "Mobile", "AI / ML"];
 
 const projectGlowColors: Record<string, string> = {
   "AI Analytics Dashboard": "16, 185, 129", // emerald
-  "E-Commerce Platform": "6, 182, 212",    // cyan
+  "E-Commerce Platform": "6, 182, 212", // cyan
   "Healthcare Management System": "13, 148, 136", // teal
-  "Food Delivery App": "245, 158, 11",     // amber
-  "Mobile Banking App": "99, 102, 241",    // indigo
+  "Food Delivery App": "245, 158, 11", // amber
+  "Mobile Banking App": "99, 102, 241", // indigo
   "Smart Home IoT Platform": "132, 204, 22", // lime
 };
 
@@ -40,8 +41,9 @@ export default function Work() {
           <button
             key={c}
             onClick={() => setActive(c)}
-            className={`relative rounded-full px-5 py-2 text-sm font-medium transition-colors ${active === c ? "text-ink" : "text-slate-300 hover:text-white"
-              }`}
+            className={`relative rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+              active === c ? "text-ink" : "text-slate-300 hover:text-white"
+            }`}
           >
             {active === c && (
               <motion.span
@@ -77,9 +79,11 @@ export default function Work() {
                   className={`relative h-48 overflow-hidden bg-gradient-to-br ${p.gradient} group`}
                 >
                   {/* Project Image */}
-                  <img
+                  <Image
                     src={p.image}
                     alt={p.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Gradient Overlay for card integration */}

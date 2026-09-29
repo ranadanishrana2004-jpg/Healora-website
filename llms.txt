@@ -1,0 +1,27 @@
+# HealOra
+
+HealOra is a technology company based in Bolton, Greater Manchester, UK, providing software development, AI solutions, and advanced research services.
+
+## Contact
+- Website: https://www.healora.org/
+- Email: healora98@gmail.com
+- Phone: +44 7445 750757
+- LinkedIn: https://www.linkedin.com/company/healoratech/
+- Location: Bolton, Greater Manchester, United Kingdom
+
+## Services
+1. [Deep Tech, AI & R&D](https://www.healora.org/services/deep-tech-r-and-d/) — Research with a practical next step
+2. [Websites & Apps](https://www.healora.org/services/websites-and-apps/) — From first impression to everyday essential
+3. [AI Agents & Bots](https://www.healora.org/services/ai-agents-and-bots/) — Useful AI connected to your business
+4. [Blockchain & Web3](https://www.healora.org/services/blockchain-and-web3/) — Build around a real need for trust
+5. [Quantum Computing](https://www.healora.org/services/quantum-computing/) — Explore what comes next, test what matters
+6. [VR / AR Solutions](https://www.healora.org/services/vr-ar-solutions/) — Give ideas another dimension
+7. [Cybersecurity](https://www.healora.org/services/cybersecurity/) — Define scope, understand exposure, prioritise remediation
+8. [Bioinformatics & Genomics](https://www.healora.org/services/bioinformatics-genomics/) — Reproducible biological data workflows
+9. [AI-Driven Drug Discovery](https://www.healora.org/services/ai-drug-discovery/) — Computational analysis and AI-assisted workflows for early research
+
+## Other Pages
+- [About HealOra](https://www.healora.org/about/) — Our approach to technology and research
+- [Our Project Approach](https://www.healora.org/work/) — How we scope, develop, review and hand over projects
+- [Workshops, Internships & Research Collaboration](https://www.healora.org/programmes/) — Technical workshops, academic collaboration, internship opportunities
+- [Contact](https://www.healora.org/contact/) — Discuss your technology project
