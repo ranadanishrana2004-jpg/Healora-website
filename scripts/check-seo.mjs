@@ -10,7 +10,7 @@ const read = (path) => readFile(resolve(root, `.${path}`), "utf8");
 const sitemap = await read("/sitemap.xml");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
 assert.equal(new Set(urls).size, urls.length, "Duplicate sitemap URLs");
-assert.equal(urls.length, 15, "Unexpected public page count: review sitemap coverage");
+assert.equal(urls.length, 17, "Unexpected public page count: review sitemap coverage");
 const pages = new Map();
 const titles = new Set();
 const descriptions = new Set();

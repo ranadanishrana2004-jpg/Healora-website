@@ -7,7 +7,7 @@ const output = join(root, ".static-dist");
 // Publish only the developer package's public files, never source or config.
 const entries = [
   "index.html", "404.html", "404", "about", "contact", "programmes",
-  "services", "work", "assets", "favicon.svg", "robots.txt",
+  "services", "work", "privacy", "terms", "assets", "favicon.svg", "robots.txt",
   "sitemap.xml", "llms.txt", "site.js", "style.css",
 ];
 
