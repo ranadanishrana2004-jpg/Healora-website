@@ -159,6 +159,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .work-link{margin-top:auto;padding-top:10px;font-weight:700;color:var(--lime);display:inline-flex;gap:10px;align-items:center;transition:gap .2s}
 .work-link:hover{gap:16px}
 
+.queue-note{margin:38px 0 0;text-align:center;color:var(--muted);font-size:1.02rem}
+.queue-note strong{color:var(--lime);font-family:var(--font-d);font-size:1.3rem}
+
 /* ---------- pipeline ---------- */
 .pipeline{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(26px,3.4vw,44px)}
 .pipe-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 28px}
