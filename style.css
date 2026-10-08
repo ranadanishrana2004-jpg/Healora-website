@@ -191,9 +191,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ---------- CTA band ---------- */
 .cta-band{background:radial-gradient(700px 320px at 85% 20%,rgba(205,244,99,.14),transparent 65%),linear-gradient(150deg,#101a12,#0a0f0a);border:1px solid var(--line2);border-radius:30px;padding:80px 72px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:48px;position:relative;overflow:hidden}
 .cta-band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(205,244,99,.5) 1.2px,transparent 1.2px);background-size:28px 28px;opacity:.07}
-.cta-band h2{margin:0;max-width:13em;position:relative}
+.cta-band h2{margin:0;max-width:13em;position:relative;color:#f2f5ee}
 .cta-band h2 .hl{color:var(--lime)}
-.cta-band p{color:var(--muted);position:relative;margin:14px 0 0;max-width:30em}
+.cta-band p{color:#a9b8a4;position:relative;margin:14px 0 0;max-width:30em}
 .cta-band .btn{position:relative;flex-shrink:0}
 
 /* ---------- footer ---------- */
