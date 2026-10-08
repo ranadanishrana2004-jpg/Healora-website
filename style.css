@@ -159,6 +159,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .work-link{margin-top:auto;padding-top:10px;font-weight:700;color:var(--lime);display:inline-flex;gap:10px;align-items:center;transition:gap .2s}
 .work-link:hover{gap:16px}
 
+/* ---------- pipeline ---------- */
+.pipeline{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(26px,3.4vw,44px)}
+.pipe-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 28px}
+.pipe-head .sec-index{margin-bottom:10px}
+.pipe-head h3{margin:0;font-size:1.5rem;flex:1 1 auto}
+.pipe-head p{margin:0;color:var(--muted);font-size:.92rem}
+.pipe-list{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.pipe-list li{display:grid;grid-template-columns:1fr 1fr auto;gap:18px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--line)}
+.pipe-list li:last-child{border-bottom:0;padding-bottom:2px}
+.pipe-list strong{display:block;font-family:var(--font-d);font-size:1.15rem;letter-spacing:-.02em;color:var(--ink)}
+.pipe-dom{font-size:.82rem;color:var(--faint)}
+.pipe-list p{margin:0;color:var(--muted);font-size:.93rem}
+.pipe-tag{font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(205,244,99,.14);color:var(--lime);padding:8px 15px;border-radius:999px;white-space:nowrap}
+@media(max-width:760px){.pipe-list li{grid-template-columns:1fr;gap:8px}}
+
 /* ---------- services ---------- */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .svc-cat{grid-column:1/-1;font-family:var(--font-d);font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:26px 0 -4px;display:flex;align-items:center;gap:16px}
