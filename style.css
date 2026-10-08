@@ -187,9 +187,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .prin-ic{width:54px;height:54px;border-radius:16px;background:rgba(205,244,99,.1);border:1px solid rgba(205,244,99,.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-weight:700;font-size:1.25rem;color:var(--lime)}
 .prin h3{margin:0 0 8px;font-size:1.18rem}
 .prin p{margin:0;font-size:.93rem;color:var(--muted)}
+.why-split{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,4vw,60px);align-items:center;margin-top:6px}
+.why-visual{position:relative;border-radius:calc(var(--radius) + 6px);overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px -30px rgba(0,0,0,.65),0 0 0 1px rgba(205,244,99,.06);transform-style:preserve-3d}
+.why-visual img{display:block;width:100%;height:auto;transform:scale(1.03)}
+.why-visual .mock-cap{position:absolute;left:18px;bottom:16px;z-index:2}
+.why-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(4,7,4,.45));pointer-events:none}
+.why-stack{display:grid;gap:0;border-top:1px solid var(--line)}
+.why-stack .prin{grid-template-columns:52px 1fr;padding:26px 0}
+.why-stack .prin:nth-child(even){padding-left:0;border-left:0}
+@media(max-width:900px){.why-split{grid-template-columns:1fr}}
 
 /* ---------- CTA band ---------- */
-.cta-band{background:radial-gradient(700px 320px at 85% 20%,rgba(205,244,99,.14),transparent 65%),linear-gradient(150deg,#101a12,#0a0f0a);border:1px solid var(--line2);border-radius:30px;padding:80px 72px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:48px;position:relative;overflow:hidden}
+.cta-band{background:linear-gradient(120deg,rgba(5,8,5,.95) 15%,rgba(8,14,8,.8) 55%,rgba(6,10,6,.93)),url(/assets/orbit-3d.jpg) center/cover,linear-gradient(150deg,#101a12,#0a0f0a);border:1px solid var(--line2);border-radius:30px;padding:80px 72px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:48px;position:relative;overflow:hidden}
 .cta-band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(205,244,99,.5) 1.2px,transparent 1.2px);background-size:28px 28px;opacity:.07}
 .cta-band h2{margin:0;max-width:13em;position:relative;color:#f2f5ee}
 .cta-band h2 .hl{color:var(--lime)}
