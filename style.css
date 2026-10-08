@@ -355,6 +355,7 @@ textarea{min-height:130px;resize:vertical}
 
 /* ---------- responsive ---------- */
 @media(max-width:1080px){
+  .hero{min-height:0;padding:56px 0 64px}
   .hero-inner{grid-template-columns:1fr;gap:60px}
   .mock-stack{min-height:440px;max-width:660px}
   .svc-grid{grid-template-columns:1fr 1fr}
