@@ -415,6 +415,8 @@ body,.site-header,.section.tint,.marquee,.page-hero,.cta-band,footer,.svc,.work-
 
 /* ---------- mouse glow follows cursor in hero ---------- */
 .cursor-glow{position:absolute;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(205,244,99,.07),transparent 60%);transform:translate(-50%,-50%);transition:opacity .4s}
+#hero-3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+[data-theme="light"] #hero-3d{opacity:.5}
 
 /* ---------- responsive additions ---------- */
 @media(max-width:1080px){

@@ -8,7 +8,7 @@ const output = join(root, ".static-dist");
 const entries = [
   "index.html", "404.html", "404", "about", "contact", "programmes",
   "services", "work", "privacy", "terms", "assets", "favicon.svg", "robots.txt",
-  "sitemap.xml", "llms.txt", "site.js", "style.css",
+  "sitemap.xml", "llms.txt", "site.js", "hero-3d.js", "style.css",
 ];
 
 // The resolved deletion target is a fixed generated directory inside this repo.
