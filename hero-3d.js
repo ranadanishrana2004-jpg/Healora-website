@@ -1,5 +1,5 @@
-/* HealOra hero — live 3D ambient scene (Three.js).
-   Floating brand-color geometry + particles, mouse-reactive.
+/* HealOra hero — ambient particle field (Three.js).
+   Soft round particles drifting slowly. No geometry, no mouse parallax.
    Fails silently: if the CDN or WebGL is unavailable the page is unaffected. */
 (function () {
   'use strict';
@@ -27,40 +27,22 @@
 
     var LIME = 0xcdf496, CYAN = 0x7ee0d2, VIOLET = 0xb9a7f2;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-    var key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4, 6, 8); scene.add(key);
-    var pLime = new THREE.PointLight(LIME, 22, 30); pLime.position.set(-6, 3, 4); scene.add(pLime);
-    var pCyan = new THREE.PointLight(CYAN, 18, 30); pCyan.position.set(6, -2, 3); scene.add(pCyan);
-
-    function mesh(geo, color, wire, opacity) {
-      var mat = new THREE.MeshStandardMaterial({
-        color: color, wireframe: !!wire, transparent: true,
-        opacity: opacity, roughness: 0.35, metalness: 0.55,
-        emissive: color, emissiveIntensity: wire ? 0.35 : 0.12
-      });
-      return new THREE.Mesh(geo, mat);
+    // Round soft sprite so particles render as circles, never squares
+    function roundSprite() {
+      var c = document.createElement('canvas');
+      c.width = c.height = 64;
+      var g = c.getContext('2d');
+      var grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.35, 'rgba(255,255,255,.85)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 64, 64);
+      return new THREE.CanvasTexture(c);
     }
 
-    var shapes = [];
-    // Large lime wireframe torus knot, back-left
-    var knot = mesh(new THREE.TorusKnotGeometry(2.1, 0.55, 120, 18), LIME, true, 0.32);
-    knot.position.set(-5.2, 0.6, -3); shapes.push({ o: knot, rs: 0.0016, fs: 0.5, fa: 0.45, y0: 0.6 });
-    scene.add(knot);
-    // Cyan icosahedron, right
-    var ico = mesh(new THREE.IcosahedronGeometry(1.25, 0), CYAN, false, 0.85);
-    ico.position.set(5.4, -1.4, -1.5); shapes.push({ o: ico, rs: 0.0028, fs: 0.7, fa: 0.55, y0: -1.4 });
-    scene.add(ico);
-    // Violet wireframe octahedron, top-center
-    var octa = mesh(new THREE.OctahedronGeometry(0.9, 0), VIOLET, true, 0.5);
-    octa.position.set(0.4, 3.1, -2.5); shapes.push({ o: octa, rs: 0.0035, fs: 0.9, fa: 0.4, y0: 3.1 });
-    scene.add(octa);
-    // Small lime solid gem, lower-left
-    var gem = mesh(new THREE.OctahedronGeometry(0.5, 0), LIME, false, 0.9);
-    gem.position.set(-2.6, -2.8, -1); shapes.push({ o: gem, rs: 0.004, fs: 1.1, fa: 0.35, y0: -2.8 });
-    scene.add(gem);
-
-    // Particle starfield
-    var N = 260, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+    // Gentle particle field only — slow drift, no interaction
+    var N = 220, pos = new Float32Array(N * 3), col = new Float32Array(N * 3), seed = new Float32Array(N);
     var palette = [new THREE.Color(LIME), new THREE.Color(CYAN), new THREE.Color(VIOLET), new THREE.Color(0xffffff)];
     for (var i = 0; i < N; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 26;
@@ -68,21 +50,16 @@
       pos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 2;
       var c = palette[(Math.random() * palette.length) | 0];
       col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+      seed[i] = Math.random() * 100;
     }
     var pgeo = new THREE.BufferGeometry();
     pgeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     pgeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
     var points = new THREE.Points(pgeo, new THREE.PointsMaterial({
-      size: 0.055, vertexColors: true, transparent: true, opacity: 0.75,
+      size: 0.14, map: roundSprite(), vertexColors: true, transparent: true, opacity: 0.55,
       blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
     }));
     scene.add(points);
-
-    var mouseX = 0, mouseY = 0, tMouseX = 0, tMouseY = 0;
-    window.addEventListener('pointermove', function (e) {
-      tMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      tMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
 
     function resize() {
       var w = hero.clientWidth, h = hero.clientHeight;
@@ -104,17 +81,13 @@
       requestAnimationFrame(frame);
       if (!visible || reduced) return;
       t += 0.008;
-      mouseX += (tMouseX - mouseX) * 0.04;
-      mouseY += (tMouseY - mouseY) * 0.04;
-      for (var k = 0; k < shapes.length; k++) {
-        var s = shapes[k];
-        s.o.rotation.x += s.rs; s.o.rotation.y += s.rs * 1.4;
-        s.o.position.y = s.y0 + Math.sin(t * s.fs + k * 1.7) * s.fa;
+      var p = pgeo.attributes.position.array;
+      for (var k = 0; k < N; k++) {
+        p[k * 3] += Math.cos(t * 0.4 + seed[k] * 1.3) * 0.0009;
+        p[k * 3 + 1] += Math.sin(t * 0.6 + seed[k]) * 0.0012;
       }
-      points.rotation.y = t * 0.02;
-      camera.position.x = mouseX * 0.9;
-      camera.position.y = -mouseY * 0.6;
-      camera.lookAt(0, 0, 0);
+      pgeo.attributes.position.needsUpdate = true;
+      points.rotation.y = t * 0.015;
       renderer.render(scene, camera);
     }
     if (reduced) { renderer.render(scene, camera); } else { frame(); }
