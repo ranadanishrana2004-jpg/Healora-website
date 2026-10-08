@@ -172,6 +172,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .pipe-dom{font-size:.82rem;color:var(--faint)}
 .pipe-list p{margin:0;color:var(--muted);font-size:.93rem}
 .pipe-tag{font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(205,244,99,.14);color:var(--lime);padding:8px 15px;border-radius:999px;white-space:nowrap}
+.pipe-list strong a{transition:color .18s}
+.pipe-list strong a:hover{color:var(--lime)}
+.pipe-note{margin:22px 0 0;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+.pipe-note strong{color:var(--lime);font-family:var(--font-d);font-size:1.1rem}
 @media(max-width:760px){.pipe-list li{grid-template-columns:1fr;gap:8px}}
 
 /* ---------- services ---------- */
