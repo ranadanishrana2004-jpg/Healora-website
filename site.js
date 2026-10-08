@@ -90,28 +90,43 @@ if(fine&&!reduced){
   });
 }
 
-/* project estimator */
+/* project estimator (form version) */
 var est=document.getElementById('estimator');
 if(est){
-  var TYPE={website:2000,webapp:7000,ai:9000,other:4500};
+  var TYPE={website:1200,webapp:4000,ai:5000,other:2500};
+  var TYPEL={website:'Website',webapp:'Web app',ai:'AI system',other:'Something else'};
+  var SIZEL={small:'Small',standard:'Standard',large:'Large / complex'};
+  var TIMEL={flex:'Flexible',soon:'In 1\u20132 months',urgent:'Urgent'};
   var SIZE={small:1,standard:1.8,large:3};
   var TIME={flex:1,soon:1.15,urgent:1.35};
-  var sel={type:'webapp',size:'standard',time:'flex'};
+  var form=document.getElementById('est-form'),done=document.getElementById('est-done');
   var out=document.getElementById('est-range');
-  function fmt(v){v=Math.round(v/500)*500;return v>=1000?('£'+(v/1000).toFixed(v%1000?1:0).replace(/\.0$/,'')+'k'):'£'+v;}
-  function update(){
-    var mid=TYPE[sel.type]*SIZE[sel.size]*TIME[sel.time];
-    out.innerHTML=fmt(mid*0.85)+' &ndash; '+fmt(mid*1.25);
-  }
-  est.querySelectorAll('.est-pills').forEach(function(group){
-    var q=group.getAttribute('data-q');
-    group.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click',function(){
-        group.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
-        b.classList.add('on');sel[q]=b.getAttribute('data-v');update();
-      });
-    });
-  });
+  function val(n){var el=form.querySelector('[name="'+n+'"]');return el?el.value:'';}
+  function fmt(v){v=Math.round(v/500)*500;return v>=1000?('\u00A3'+(v/1000).toFixed(v%1000?1:0).replace(/\.0$/,'')+'k'):'\u00A3'+v;}
+  function range(){var mid=TYPE[val('type')]*SIZE[val('size')]*TIME[val('time')];return fmt(mid*0.85)+' \u2013 '+fmt(mid*1.25);}
+  function update(){out.textContent=range();}
+  form.querySelectorAll('select').forEach(function(s){s.addEventListener('change',update);});
   update();
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var ok=true;
+    var msg=form.querySelector('#est-msg'),nameEl=form.querySelector('[name="name"]'),emailEl=form.querySelector('[name="email"]');
+    [msg,nameEl].forEach(function(el){el.classList.toggle('err',!el.value.trim());if(!el.value.trim())ok=false;});
+    var em=emailEl.value.trim();
+    var emOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    emailEl.classList.toggle('err',!emOk);if(!emOk)ok=false;
+    if(!ok){(form.querySelector('.err')||form).focus();return;}
+    var r=range();
+    document.getElementById('est-final').textContent=r;
+    var first=nameEl.value.trim().split(' ')[0];
+    document.getElementById('est-thanks').textContent='Thanks '+first+'! Here\u2019s your starting point \u2014 send us the details and we\u2019ll come back with a proper written scope.';
+    var body='Name: '+nameEl.value.trim()+'\nEmail: '+em+'\nProject type: '+TYPEL[val('type')]+'\nSize: '+SIZEL[val('size')]+'\nTimeline: '+TIMEL[val('time')]+'\nRough indication shown: '+r+'\n\nProject details:\n'+msg.value.trim();
+    document.getElementById('est-mailto').href='mailto:healora98@gmail.com?subject='+encodeURIComponent('Project estimate request \u2014 '+nameEl.value.trim())+'&body='+encodeURIComponent(body);
+    form.hidden=true;done.hidden=false;
+    done.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});
+  });
+  document.getElementById('est-back').addEventListener('click',function(){
+    done.hidden=true;form.hidden=false;update();
+  });
 }
 })();
