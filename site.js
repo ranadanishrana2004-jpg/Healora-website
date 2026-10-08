@@ -61,3 +61,57 @@ if(stage&&fine){
   stage.addEventListener('mouseleave',function(){mx=0;my=0;tilts.forEach(function(el){el.style.transform='';});});
 }
 })();
+/* ---------- uniqueness pack: estimator, magnetic buttons, progress, entrance ---------- */
+(function(){
+"use strict";
+var fine=window.matchMedia&&window.matchMedia('(pointer:fine)').matches;
+var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* hero entrance */
+requestAnimationFrame(function(){requestAnimationFrame(function(){document.body.classList.add('loaded');});});
+
+/* scroll progress */
+var bar=document.createElement('div');bar.id='progress';document.body.appendChild(bar);
+function onScroll(){
+  var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,max=h.scrollHeight-h.clientHeight;
+  bar.style.width=(max>0?(sc/max*100):0)+'%';
+}
+document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* magnetic buttons */
+if(fine&&!reduced){
+  document.querySelectorAll('.btn.lime').forEach(function(btn){
+    btn.addEventListener('mousemove',function(ev){
+      var r=btn.getBoundingClientRect();
+      var x=(ev.clientX-r.left-r.width/2)/r.width,y=(ev.clientY-r.top-r.height/2)/r.height;
+      btn.style.transform='translate('+(x*10).toFixed(1)+'px,'+(y*8).toFixed(1)+'px)';
+    });
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+
+/* project estimator */
+var est=document.getElementById('estimator');
+if(est){
+  var TYPE={website:2000,webapp:7000,ai:9000,other:4500};
+  var SIZE={small:1,standard:1.8,large:3};
+  var TIME={flex:1,soon:1.15,urgent:1.35};
+  var sel={type:'webapp',size:'standard',time:'flex'};
+  var out=document.getElementById('est-range');
+  function fmt(v){v=Math.round(v/500)*500;return v>=1000?('£'+(v/1000).toFixed(v%1000?1:0).replace(/\.0$/,'')+'k'):'£'+v;}
+  function update(){
+    var mid=TYPE[sel.type]*SIZE[sel.size]*TIME[sel.time];
+    out.innerHTML=fmt(mid*0.85)+' &ndash; '+fmt(mid*1.25);
+  }
+  est.querySelectorAll('.est-pills').forEach(function(group){
+    var q=group.getAttribute('data-q');
+    group.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        group.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');sel[q]=b.getAttribute('data-v');update();
+      });
+    });
+  });
+  update();
+}
+})();
