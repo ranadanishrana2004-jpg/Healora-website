@@ -118,8 +118,7 @@ if(est){
     if(!ok){(form.querySelector('.err')||form).focus();return;}
     var r=range();
     document.getElementById('est-final').textContent=r;
-    var first=nameEl.value.trim().split(' ')[0];
-    document.getElementById('est-thanks').textContent='Thanks '+first+'! Here\u2019s your starting point \u2014 send us the details and we\u2019ll come back with a proper written scope.';
+    document.getElementById('est-thanks').textContent='Thanks '+nameEl.value.trim()+'! Here\u2019s your starting point \u2014 send us the details and we\u2019ll come back with a proper written scope.';
     var body='Name: '+nameEl.value.trim()+'\nEmail: '+em+'\nProject type: '+TYPEL[val('type')]+'\nSize: '+SIZEL[val('size')]+'\nTimeline: '+TIMEL[val('time')]+'\nRough indication shown: '+r+'\n\nProject details:\n'+msg.value.trim();
     document.getElementById('est-mailto').href='mailto:healora98@gmail.com?subject='+encodeURIComponent('Project estimate request \u2014 '+nameEl.value.trim())+'&body='+encodeURIComponent(body);
     form.hidden=true;done.hidden=false;
