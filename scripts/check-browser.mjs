@@ -99,7 +99,7 @@ try {
   assert.equal(await evaluate(`document.querySelector('form').checkValidity()`), false);
   await evaluate(`document.querySelector('[name=name]').value='Test visitor'; document.querySelector('[name=email]').value='test@example.com'; document.querySelector('[name=message]').value='Local validation only';`);
   assert.equal(await evaluate(`document.querySelector('form').checkValidity()`), true);
-  // Do not submit: this form opens the visitor's email app.
+  // Do not submit: this form sends a real email to the HealOra inbox.
   await command("Emulation.setScriptExecutionDisabled", { value: true });
   await navigate("/services/websites-and-apps/");
   const document = await command("DOM.getDocument", { depth: 0 });

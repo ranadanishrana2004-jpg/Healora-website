@@ -490,3 +490,19 @@ body,.site-header,.section.tint,.marquee,.page-hero,.cta-band,footer,.svc,.work-
   .aurora,.cursor-glow{display:none}
   .tilt{transform:none!important}
 }
+/* ---------- enquiry status, honeypot, floating contact dock ---------- */
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+#form-status:empty{display:none}
+#form-status.form-status{padding:16px 18px;border-radius:14px;line-height:1.55;font-weight:500;color:var(--ink)}
+#form-status.ok{background:rgba(205,244,99,.12);border:1px solid var(--lime)}
+#form-status.err{background:rgba(255,120,100,.1);border:1px solid #e0705c}
+#form-status a{color:var(--lime);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+#enquiry button[disabled]{opacity:.65;cursor:progress;transform:none}
+.contact-dock{position:fixed;right:20px;bottom:20px;z-index:150;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.dock-btn{display:inline-flex;align-items:center;gap:9px;height:52px;padding:0 18px 0 15px;border-radius:999px;font-weight:700;font-size:.9rem;box-shadow:0 10px 28px rgba(0,0,0,.28);transition:transform .2s,box-shadow .2s}
+.dock-btn svg{width:22px;height:22px;flex:none}
+.dock-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.34)}
+.dock-wa{background:#25d366;color:#06301a}
+.dock-mail{background:var(--lime);color:var(--lime-ink)}
+@media(max-width:720px){.contact-dock{right:14px;bottom:14px}.dock-btn{width:50px;height:50px;padding:0;justify-content:center}.dock-btn span{display:none}}
+@media print{.contact-dock{display:none}}

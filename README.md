@@ -29,7 +29,7 @@ Directory pages use trailing slashes, and `404.html` supplies the missing-page r
 
 The canonical site is https://www.healora.org. Deployment does not require DNS or email-record changes. Verify the homepage, all 15 sitemap URLs, navigation, contact form, assets, slash redirects, and an unknown URL after release.
 
-The contact form prepares a draft to `healora98@gmail.com` in the visitor's email app. It does not send or store enquiries; the page explains this behavior.
+The contact form and homepage estimator send enquiries to `healora98@gmail.com` through FormSubmit (`https://formsubmit.co/ajax/healora98@gmail.com`). FormSubmit needs a one-time activation: after the first submission it emails an activation link to that inbox, which must be clicked before enquiries are delivered. If sending fails, the page offers pre-filled WhatsApp (`wa.me/447445750757`) and email fallbacks. Every page also shows floating WhatsApp and email buttons (injected by `site.js`).
 
 ## Rollback
 
